@@ -28,7 +28,9 @@ public class InstanceManager{
 	public boolean getInstanceIntegrity() {
 		try {
 		    String line;
-		    Process p = Runtime.getRuntime().exec("ps -e");
+		    Process p = Runtime.getRuntime().exec
+		    	    (System.getenv("windir") +"\\system32\\"+"tasklist.exe /fo csv /nh");
+
 		    BufferedReader input =
 		            new BufferedReader(new InputStreamReader(p.getInputStream()));
 		    while ((line = input.readLine()) != null) {
