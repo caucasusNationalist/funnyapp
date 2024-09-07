@@ -28,11 +28,19 @@ public class Window implements ActionListener, Runnable{
 	int size = 300;
 	int restartState = 0;
 	
+
+	 String[] text0 = { "hey", "I lied so like", "it is actually a virus", "you've got like 10 minutes to figure this out"};
+	 String[] text1 = { "yep that's the main feature of the program", "you can't close it using task manager"};
+	 String[] text2 = { "the timer does not reset even if you try real hard", ""};
+	 String[] text3 = { ""};
+	 String[][] text = {text0, text1, text2, text3};
 	
-	String[] text = { "hey", "I lied so like", "it is actually a virus",
-			"you've got like 10 minutes to figure this out" };
+	
+	
 	public Window(int size, int arg) {
 		this.size = size;
+		restartState = arg;
+		
 	}
 
 	public void run() {
@@ -67,7 +75,7 @@ public class Window implements ActionListener, Runnable{
 		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		
 		frame.setVisible(true);
-		
+		frame.setVisible(false);
 //        Runtime.getRuntime().addShutdownHook(new Thread(){
 //        	public void run() {
 //        		try {
@@ -82,8 +90,8 @@ public class Window implements ActionListener, Runnable{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (dialogueIterator != text.length) {
-			label.setText(text[dialogueIterator]);
+		if (dialogueIterator != text[restartState].length) {
+			label.setText(text[restartState][dialogueIterator]);
 			dialogueIterator++;
 			return;
 		}

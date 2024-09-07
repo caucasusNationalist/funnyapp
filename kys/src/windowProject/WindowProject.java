@@ -1,9 +1,9 @@
 package windowProject;
 
-public class Main {
+public class WindowProject {
 
 	public static void main(String[] args) {
-		new InstanceManager(args);
+		new Window(300, 0);
 	}
 
 }

@@ -11,11 +11,11 @@ public class InstanceManager {
 	String runningLocation = "";
 	Timer taskScheduler;
 	Window window;
-	
+	int procCount;
 	int appState = 0;
 
 	public InstanceManager(String[] args) {
-		if(args.length != 0) {
+		if(args.length != 0 && args[0] != null) {
 			appState = Integer.parseInt(args[0]);
 		}
 //		getRunningLocation();
@@ -23,11 +23,13 @@ public class InstanceManager {
 //		window.label.setText("it edits the instance !!!!");
 		
 		window = new Window(300, appState);
+		new Thread(window).start();
 	
 	}
 
-	public boolean getInstanceIntegrity() {
-		int procCount = 0;
+	public int getInstanceCount() {
+		int count = 0;
+
 		try {
 			String line;
 
@@ -38,7 +40,7 @@ public class InstanceManager {
 			while ((line = input.readLine()) != null) {
 
 				if (line.contains("javaw.exe")) {
-					procCount++;
+					count++;
 				}
 
 			}
@@ -49,20 +51,20 @@ public class InstanceManager {
 		}
 
 		System.out.println(procCount);
-		if (procCount > 1)
-			return true;
-
-		return false;
+		return count;
 	}
 
-	public String getRunningLocation() {
+
+	public void runBackupInstance() {
+		appState++;
 		String locale = "";
 		try {
 			locale = new File(Window.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getPath();
+			Runtime.getRuntime().exec("java -jar " + locale + " " + appState);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return locale;
+		
 	}
 
 }
