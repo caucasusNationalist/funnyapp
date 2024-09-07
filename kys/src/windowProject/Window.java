@@ -26,7 +26,7 @@ public class Window implements ActionListener, Runnable{
 	GridBagConstraints labelConstr;
 	int dialogueIterator = 1;
 	int size = 300;
-	int restartState = 0;
+	int restartCount = 0;
 	
 
 	 String[] text0 = { "hey", "I lied so like", "it is actually a virus", "you've got like 10 minutes to figure this out"};
@@ -39,7 +39,7 @@ public class Window implements ActionListener, Runnable{
 	
 	public Window(int size, int arg) {
 		this.size = size;
-		restartState = arg;
+		restartCount = arg;
 		
 	}
 
@@ -48,7 +48,7 @@ public class Window implements ActionListener, Runnable{
 		System.out.println("window open!");
 //		frame.addWindowListener(this);
 		panel = new JPanel();
-		label = new JLabel("hey");
+		label = new JLabel(text[restartCount][0]);
 		button = new JButton("next");
         button.addActionListener(this);
         
@@ -75,7 +75,6 @@ public class Window implements ActionListener, Runnable{
 		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		
 		frame.setVisible(true);
-		frame.setVisible(false);
 //        Runtime.getRuntime().addShutdownHook(new Thread(){
 //        	public void run() {
 //        		try {
@@ -90,8 +89,8 @@ public class Window implements ActionListener, Runnable{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (dialogueIterator != text[restartState].length) {
-			label.setText(text[restartState][dialogueIterator]);
+		if (dialogueIterator != text[restartCount].length) {
+			label.setText(text[restartCount][dialogueIterator]);
 			dialogueIterator++;
 			return;
 		}

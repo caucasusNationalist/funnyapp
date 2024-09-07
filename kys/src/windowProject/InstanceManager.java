@@ -5,26 +5,49 @@ import java.io.File;
 import java.io.InputStreamReader;
 //import java.net.URISyntaxException;
 import java.util.Timer;
+import java.util.TimerTask;
 
-public class InstanceManager {
+public class InstanceManager extends TimerTask {
 
 	String runningLocation = "";
 	Timer taskScheduler;
-	Window window;
+	Window window = null;
+
 	int procCount;
-	int appState = 0;
+	int restartCount = 0;
+	boolean windowVisible = false;
 
 	public InstanceManager(String[] args) {
-		if(args.length != 0 && args[0] != null) {
-			appState = Integer.parseInt(args[0]);
+		if (args.length != 0 && args[0] != null) {
+				restartCount = Integer.parseInt(args[0]);
 		}
 //		getRunningLocation();
-//		taskScheduler = new Timer();
+		taskScheduler = new Timer();
+		taskScheduler.scheduleAtFixedRate(this, 0, 10);
 //		window.label.setText("it edits the instance !!!!");
+
+		window = new Window(300, restartCount);
+
+	}
+
+	@Override
+	public void run() {
+		if (getInstanceCount() < procCount) {
+            
+			restartCount++;
+			window.restartCount = restartCount;
+			
+			runReplacementInstance();
+			
+			if(!windowVisible) {
+				new Thread(window).start();
+				windowVisible = true;
+			}
+			
+		procCount = getInstanceCount();
+
+		}
 		
-		window = new Window(300, appState);
-		new Thread(window).start();
-	
 	}
 
 	public int getInstanceCount() {
@@ -54,17 +77,15 @@ public class InstanceManager {
 		return count;
 	}
 
-
-	public void runBackupInstance() {
-		appState++;
+	public void runReplacementInstance() {
 		String locale = "";
 		try {
 			locale = new File(Window.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getPath();
-			Runtime.getRuntime().exec("java -jar " + locale + " " + appState);
+			Runtime.getRuntime().exec("java -jar " + locale + " " + restartCount);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 	}
 
 }

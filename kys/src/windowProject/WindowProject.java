@@ -3,7 +3,7 @@ package windowProject;
 public class WindowProject {
 
 	public static void main(String[] args) {
-		new Window(300, 0);
+		new Thread(new Window(300, 1)).start();
 	}
 
 }
