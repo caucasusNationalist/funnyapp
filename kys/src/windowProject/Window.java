@@ -25,17 +25,14 @@ public class Window implements ActionListener, Runnable{
 	GridBagConstraints buttonConstr;
 	GridBagConstraints labelConstr;
 	int dialogueIterator = 1;
-	int size;
+	int size = 300;
 	int restartState = 0;
 	
 	
 	String[] text = { "hey", "I lied so like", "it is actually a virus",
 			"you've got like 10 minutes to figure this out" };
-	public Window(int size, String[] restartStateArgs) {
+	public Window(int size, int arg) {
 		this.size = size;
-		if(restartStateArgs.length != 0) {
-			restartState = Integer.parseInt(restartStateArgs[0]);
-		}
 	}
 
 	public void run() {
@@ -69,8 +66,7 @@ public class Window implements ActionListener, Runnable{
 //		frame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		
-		
-		panel.setVisible(true);
+		frame.setVisible(true);
 		
 //        Runtime.getRuntime().addShutdownHook(new Thread(){
 //        	public void run() {

@@ -1,9 +1,9 @@
 package windowProject;
 
-public class WindowProject {
+public class Main {
 
 	public static void main(String[] args) {
-		new Thread(new Window(300, args)).start();
+		new InstanceManager(args);
 	}
 
 }
