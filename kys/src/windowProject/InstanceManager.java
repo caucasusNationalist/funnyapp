@@ -13,7 +13,6 @@ public class InstanceManager extends TimerTask {
 	Timer taskScheduler;
 	Window window = null;
 
-
 	int restartCount = 0;
 	boolean windowVisible = false;
 
@@ -29,6 +28,9 @@ public class InstanceManager extends TimerTask {
 		window = new Window(300, restartCount);
 
 	}
+	public static void main(String[] args) {
+		new InstanceManager(args);
+	}
 
 	@Override
 	public void run() {
@@ -37,13 +39,13 @@ public class InstanceManager extends TimerTask {
 				restartCount++;
 				window.restartCount = restartCount;
 			}
+
 			runReplacementInstance();
 
 			if (!windowVisible) {
-				new Thread(window).start(); 
+				new Thread(window).start();
 				windowVisible = true;
 			}
-
 
 		}
 
@@ -76,7 +78,8 @@ public class InstanceManager extends TimerTask {
 
 	public void runReplacementInstance() {
 		try {
-			runningLocation = new File(InstanceManager.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getPath();
+			runningLocation = new File(
+					InstanceManager.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getPath();
 			Runtime.getRuntime().exec("java -jar " + runningLocation + " " + restartCount);
 		} catch (Exception e) {
 			e.printStackTrace();
