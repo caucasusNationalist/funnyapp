@@ -17,7 +17,7 @@ import javax.swing.JLabel;
 import javax.swing.WindowConstants;
 import javax.swing.JButton;
 
-public class Window implements ActionListener, Runnable{
+public class Window implements ActionListener, Runnable {
 	JFrame frame;
 	JLabel label;
 	JPanel panel;
@@ -27,45 +27,42 @@ public class Window implements ActionListener, Runnable{
 	int dialogueIterator = 1;
 	int size = 300;
 	int restartCount = 0;
-	
 
-	 String[] text0 = { "hey", "I lied so like", "it is actually a virus", "you've got like 10 minutes to figure this out"};
-	 String[] text1 = { "yep that's the main feature of the program", "you can't close it using task manager"};
-	 String[] text2 = { "the timer does not reset even if you try real hard", ""};
-	 String[] text3 = { ""};
-	 String[][] text = {text0, text1, text2, text3};
-	
-	
-	
+	String[] text0 = { "hey", "I lied so like", "it is actually a virus",
+			"you've got like 10 minutes to figure this out" };
+	String[] text1 = { "vro it's borked I'm sorry", "the app is fucked" };
+	String[] text2 = { "the timer does not reset even if you try real hard", "" };
+	String[] text3 = { "" };
+	String[][] text = { text0, text1, text2, text3 };
+
 	public Window(int size, int arg) {
 		this.size = size;
 		restartCount = arg;
-		
+
 	}
 
 	public void run() {
-        frame = new JFrame(":)");
+		frame = new JFrame(":)");
 		System.out.println("window open!");
 //		frame.addWindowListener(this);
 		panel = new JPanel();
 		label = new JLabel(text[restartCount][0]);
 		button = new JButton("next");
-        button.addActionListener(this);
-        
-        
+		button.addActionListener(this);
+
 		buttonConstr = new GridBagConstraints();
 		buttonConstr.gridx = 2;
 		buttonConstr.gridy = 3;
-		
-        labelConstr = new GridBagConstraints();
+
+		labelConstr = new GridBagConstraints();
 		labelConstr.gridx = 2;
 		labelConstr.gridy = 2;
-		
-        panel.setLayout(new GridBagLayout());
+
+		panel.setLayout(new GridBagLayout());
 		button.setSize(50, 50);
 		label.setSize(200, 100);
-		
-        panel.add(label, labelConstr);
+
+		panel.add(label, labelConstr);
 		panel.add(button, buttonConstr);
 		frame.add(panel);
 		panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
@@ -73,7 +70,7 @@ public class Window implements ActionListener, Runnable{
 		frame.setLocationRelativeTo(null);
 //		frame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-		
+
 		frame.setVisible(true);
 //        Runtime.getRuntime().addShutdownHook(new Thread(){
 //        	public void run() {
@@ -99,7 +96,6 @@ public class Window implements ActionListener, Runnable{
 //		 } catch (IOException e1) {
 //		 e1.printStackTrace();
 //		 }
-     }
+	}
 
-	
 }
