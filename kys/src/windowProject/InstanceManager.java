@@ -8,41 +8,58 @@ import java.util.Timer;
 
 public class InstanceManager{
 	Window window;
-	//task id = 5364
+	
+	
 	String runningLocation = "";
 	Timer taskScheduler;
 	public InstanceManager(Window window) {
 		this.window = window;
-		try {
-			runningLocation = new File(Window.class.getProtectionDomain().getCodeSource().getLocation()
-				    .toURI()).getPath();
-		} catch (URISyntaxException e) {
-			e.printStackTrace();
-		}
-		taskScheduler = new Timer();
-		
+		getRunningLocation();
+		//taskScheduler = new Timer();
+		getInstanceIntegrity(); //temp
 	}
 	
     
     
 	public boolean getInstanceIntegrity() {
+		int procCount = 0;
 		try {
 		    String line;
+		    
 		    Process p = Runtime.getRuntime().exec
 		    	    (System.getenv("windir") +"\\system32\\"+"tasklist.exe /fo csv /nh");
 
 		    BufferedReader input =
 		            new BufferedReader(new InputStreamReader(p.getInputStream()));
 		    while ((line = input.readLine()) != null) {
-		        System.out.println(line); //<-- Parse data here.
+		    	
+		        if(line.contains("javaw.exe")){
+		        	procCount++;
+		        }
+		        
 		    }
 		    input.close();
+		    
 		} catch (Exception err) {
 		    err.printStackTrace();
 		}
 		
+		System.out.println(procCount);
+		if(procCount > 1) return true;
 		
-		return false; // placeholder please replace
+		return false;
+	}
+	
+	
+	public String getRunningLocation() {
+		String locale = "";
+		try {
+		locale = new File(Window.class.getProtectionDomain().getCodeSource().getLocation()
+			    .toURI()).getPath();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return locale;
 	}
 
 }

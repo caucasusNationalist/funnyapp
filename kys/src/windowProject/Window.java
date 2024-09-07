@@ -4,11 +4,11 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
+//import java.io.File;
 //import java.awt.event.WindowEvent;
 //import java.io.IOException;
 //import java.awt.event.WindowListener;
-import java.net.URISyntaxException;
+//import java.net.URISyntaxException;
 
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
@@ -97,15 +97,6 @@ public class Window implements ActionListener, Runnable{
 //		 e1.printStackTrace();
 //		 }
      }
-//	public String getRunningLocation() {
-//		String locale = "";
-//		try {
-//		locale = new File(Window.class.getProtectionDomain().getCodeSource().getLocation()
-//			    .toURI()).getPath();
-//		} catch(Exception e) {
-//			e.printStackTrace();
-//		}
-//		return locale;
-//	}
+
 	
 }
