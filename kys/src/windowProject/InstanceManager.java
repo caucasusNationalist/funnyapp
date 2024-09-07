@@ -11,9 +11,9 @@ public class InstanceManager extends TimerTask {
 
 	String runningLocation = "";
 	Timer taskScheduler;
-//	Window window = null;
+	Window window = null;
 
-	int procCount = 2;
+
 	int restartCount = 0;
 	boolean windowVisible = false;
 
@@ -26,21 +26,21 @@ public class InstanceManager extends TimerTask {
 		taskScheduler.scheduleAtFixedRate(this, 0, 10);
 //		window.label.setText("it edits the instance !!!!");
 
-//		window = new Window(300, restartCount);
+		window = new Window(300, restartCount);
 
 	}
 
 	@Override
 	public void run() {
-		if (getInstanceCount() < procCount) {
+		if (getInstanceCount() < 2) {
 			if (restartCount < 3) {
 				restartCount++;
-//				window.restartCount = restartCount;
+				window.restartCount = restartCount;
 			}
 			runReplacementInstance();
 
 			if (!windowVisible) {
-				new Thread(new Window(300, restartCount)).start(); 
+				new Thread(window).start(); 
 				windowVisible = true;
 			}
 
