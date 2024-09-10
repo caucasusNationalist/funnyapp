@@ -19,7 +19,7 @@ import javax.swing.JButton;
 
 public class Window implements ActionListener, Runnable {
 	JFrame frame;
-	JLabel label;
+	JLabel label = new JLabel();;
 	JPanel panel;
 	JButton button;
 	GridBagConstraints buttonConstr;
@@ -46,7 +46,7 @@ public class Window implements ActionListener, Runnable {
 		System.out.println("window open!");
 //		frame.addWindowListener(this);
 		panel = new JPanel();
-		label = new JLabel(text[restartCount][0]);
+//		label = new JLabel(text[restartCount][0]);
 		button = new JButton("next");
 		button.addActionListener(this);
 
