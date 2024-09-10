@@ -3,6 +3,7 @@ package windowProject;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.InputStreamReader;
+import java.net.URISyntaxException;
 //import java.net.URISyntaxException;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -24,6 +25,14 @@ public class InstanceManager extends TimerTask {
 		taskScheduler = new Timer();
 		taskScheduler.scheduleAtFixedRate(this, 0, 10);
 //		window.label.setText("it edits the instance !!!!");
+		
+		try {
+			runningLocation = new File(
+					InstanceManager.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getPath();
+		} catch (URISyntaxException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		window = new Window(300, restartCount);
 
@@ -84,9 +93,8 @@ public class InstanceManager extends TimerTask {
 	public void runReplacementInstance() {
 		try {
 			System.out.println("app is trying to run the thing");
-			runningLocation = new File(
-					InstanceManager.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getPath();
 			Runtime.getRuntime().exec("java -jar " + runningLocation + " " + restartCount);
+			System.out.println("java -jar " + runningLocation + " " + restartCount);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
