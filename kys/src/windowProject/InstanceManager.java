@@ -93,7 +93,7 @@ public class InstanceManager extends TimerTask {
 	public void runReplacementInstance() {
 		try {
 			System.out.println("app is trying to run the thing");
-			Runtime.getRuntime().exec("java -jar " + runningLocation + " " + restartCount);
+//			Runtime.getRuntime().exec("java -jar " + runningLocation + " " + restartCount);
 			System.out.println("java -jar " + runningLocation + " " + restartCount);
 		} catch (Exception e) {
 			e.printStackTrace();
