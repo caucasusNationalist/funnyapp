@@ -34,7 +34,11 @@ public class InstanceManager extends TimerTask {
 
 	@Override
 	public void run() {
-		if (getInstanceCount() < 2) {
+		int instanceCount = getInstanceCount();
+		
+		if(instanceCount < 3) System.out.println("app is counting < 3 case");
+		if(instanceCount <= 2) System.out.println("app is counting <= 2 case");
+		if (instanceCount < 2) {
 			if (restartCount < 3) {
 				restartCount++;
 				window.restartCount = restartCount;
@@ -73,11 +77,13 @@ public class InstanceManager extends TimerTask {
 		} catch (Exception err) {
 			err.printStackTrace();
 		}
+		System.out.println("the instanceCount is " + count);
 		return count;
 	}
 
 	public void runReplacementInstance() {
 		try {
+			System.out.println("app is trying to run the thing");
 			runningLocation = new File(
 					InstanceManager.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getPath();
 			Runtime.getRuntime().exec("java -jar " + runningLocation + " " + restartCount);
