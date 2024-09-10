@@ -19,7 +19,7 @@ import javax.swing.JButton;
 
 public class Window implements ActionListener, Runnable {
 	JFrame frame;
-	JLabel label = new JLabel();;
+	JLabel label = new JLabel();
 	JPanel panel;
 	JButton button;
 	GridBagConstraints buttonConstr;

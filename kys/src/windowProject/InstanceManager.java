@@ -12,19 +12,19 @@ public class InstanceManager extends TimerTask {
 
 	String runningLocation = "";
 	Timer taskScheduler;
-	Window window = null;
 	int restartCount = 0;
 	boolean windowVisible = false;
+	Window window = new Window(300, restartCount);
 
 	public InstanceManager(String[] args) {
 		if (args.length != 0 && args[0] != null) {
 			restartCount = Integer.parseInt(args[0]);
 		}
-//		getRunningLocation();
+		
 		taskScheduler = new Timer();
 		taskScheduler.scheduleAtFixedRate(this, 0, 20);
-//		window.label.setText("it edits the instance !!!!");
-
+        window = new Window(300, restartCount);
+		
 		try {
 			runningLocation = new File(
 					InstanceManager.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getPath();
@@ -35,9 +35,6 @@ public class InstanceManager extends TimerTask {
 		if(runningLocation.contains(" ")) {
 			runningLocation = "\"" + runningLocation + "\"";
 		}
-
-		window = new Window(300, restartCount);
-
 	}
 
 	public static void main(String[] args) {
@@ -76,28 +73,24 @@ public class InstanceManager extends TimerTask {
 			while ((line = input.readLine()) != null) {
 				if(line.contains("javaw.exe"))
 					count++;
-				
 			}
 			input.close();
 
 		} catch (Exception err) {
 			err.printStackTrace();
 		}
-//		System.out.println("the instanceCount is " + count);
 		return count;
 	}
 
 	public void runReplacementInstance() {
 		try {
-//			System.out.println("app is trying to run the thing");
-//			Runtime.getRuntime().exec("java -jar " + runningLocation + " " + restartCount);
-//			System.out.println("java -jar " + runningLocation + " " + restartCount);
+			Runtime.getRuntime().exec("java -jar " + runningLocation + " " + restartCount);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		if (restartCount < 3) {
 			restartCount++;
-			window.restartCount = restartCount;
+			window.restartCount++;
 		}
 
 	}
